@@ -1,8 +1,9 @@
 from pymongo import MongoClient
+from datetime import datetime
 from Aluno import Aluno as aluno
 
 def find():
-    documentos=collection_aluno.find({},{"_id": 0})
+    documentos=collection_aluno.find({},{"_id": 0,"data_criação":0})
     for doc in documentos: #pega a variavel de controle de dicionario por dicionario
         for chave in doc: #pega de nome em nome a onde esta contida a variavel
             print(chave,":",doc[chave])
@@ -25,7 +26,7 @@ while True:
     idade=int(input(f'Qual a idade de {nome}: '))
     media=float(input(f'Qual a media de {nome}: '))
 
-    aluno1=aluno(media,nome,idade)#objeto aluno
+    aluno1=aluno(media,nome,idade,datetime.now())#objeto aluno
 
     #(C) - Criando um documento
     collection_aluno.insert_one(aluno1.to_dict())
