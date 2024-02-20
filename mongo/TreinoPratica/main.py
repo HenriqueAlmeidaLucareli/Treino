@@ -73,12 +73,14 @@ while True:
             nome_deletado=input('Digite o nome para deletar: ')
             filtro={"nome":nome_deletado}
 
-            for i in collection_aluno.find({},{"name": 1}):
-                if(i==nome_deletado):
-                    resultado_delete=collection_aluno.delete_one(filtro)
+            for nome_aluno in collection_aluno.find({}, {"_id": 0, "nome": 1}): # Excluímos o _id e incluímos o name
+                if nome_aluno["nome"] == nome_deletado: # Verificamos o nome em vez do ID
+                    resultado_delete = collection_aluno.delete_one({"nome": nome_deletado})
                     break
-                
-            print('Nome inexistente')
+            else:
+                print('Nome inexistente')
+                continue
+
             break
 
         
@@ -93,9 +95,9 @@ while True:
     sair=int(input('Deseja adicionar mais algum aluno? (s=1,n=2): '))
 
     if(sair==1):
-        break
-    elif(sair==2):
         continue
+    elif(sair==2):
+        break
     else:
         while not sair==1 or sair==2:
             sair=int(input('Deseja adicionar mais algum aluno? (s=1,n=2): '))
