@@ -9,6 +9,7 @@ def find():
             print(chave,":",doc[chave])
         print('\n')
 
+#faz a conexão com o banco
 conexao=MongoClient("mongodb://localhost:27017")
 
 #criar um banco de dados
@@ -17,6 +18,7 @@ escola=conexao["escola"] #<- O nome do banco no MongoDb vai ser a chave
 #criar uma collection
 collection_aluno=escola["alunos"]#<- O nome da collection no MongoDb vai ser a chave
 
+#Inicio--------------------------------------------------------------------------------------
 while True:
     quantAlunos = collection_aluno.count_documents({}) # conta quantos doumentos tem no banco
     print(f'Alunos cadastrados no banco: {quantAlunos}')
@@ -40,10 +42,10 @@ while True:
     #Printa o que esta no banco
     find()
 
-    #Altarar-----------------------------------------------------------------
-    pontos_estras=int(input(f'O aluno {nome} merece pontos extras (s=1/n=2)'))
+    #Alterar-----------------------------------------------------------------
+    extras=int(input(f'O aluno {nome} merece pontos extras (s=1/n=2)'))
 
-    if(pontos_estras==1):
+    if(extras==1):
         nota=float(input(f'Quantos pontos ele tirou na pratica? (0 á 2): '))
 
         #Verifica se a nota da pratica esta entre 0 e 2
@@ -61,7 +63,7 @@ while True:
 
             find()
 
-    elif(pontos_estras==2):
+    elif(extras==2):
         print("Nada Modificado")
         find()
 
