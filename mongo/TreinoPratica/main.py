@@ -103,4 +103,4 @@ while True:
         break
     else:
         while not sair==1 or sair==2:
-            sair=int(input('Deseja adicionar mais algum aluno? (s=1,n=2): '))
+            sair=int(input('Deseja adicionar mais algum aluno? (sim=1,não=2): '))
